@@ -10,7 +10,7 @@ function LoginPage() {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showRegPassword, setShowRegPassword] = useState(false);
   const [showRegConfirm, setShowRegConfirm] = useState(false);
-  
+
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [loginEmailError, setLoginEmailError] = useState('');
@@ -30,7 +30,6 @@ function LoginPage() {
   const [regLoading, setRegLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
-  // Show register tab if navigate from sign up
   useEffect(() => {
     if (location.state && location.state.openRegister) {
       setActiveTab('register');
@@ -61,7 +60,7 @@ function LoginPage() {
     e.preventDefault();
     clearAllErrors();
     let valid = true;
-    
+
     if (!loginEmail.includes('@') || !loginEmail.includes('.')) {
       setLoginEmailError('Enter a valid email.');
       valid = false;
@@ -70,15 +69,16 @@ function LoginPage() {
       setLoginPasswordError('Password too short.');
       valid = false;
     }
-    
+
     if (!valid) return;
-    
+
     setLoginLoading(true);
     setTimeout(() => {
       setLoginLoading(false);
       setLoginSuccess('✓ Login successful! Redirecting...');
       setTimeout(() => {
-        navigate('/payment');
+        // Redirect to home page after successful login
+        navigate('/home');
       }, 1500);
     }, 1200);
   };
@@ -87,12 +87,12 @@ function LoginPage() {
     e.preventDefault();
     clearAllErrors();
     let valid = true;
-    
+
     const passwordValid = regPassword.length >= 6 &&
       /[A-Z]/.test(regPassword) &&
       /[0-9]/.test(regPassword) &&
       /[^A-Za-z0-9]/.test(regPassword);
-    
+
     if (regName.length < 2) {
       setRegNameError('Enter your full name.');
       valid = false;
@@ -109,9 +109,9 @@ function LoginPage() {
       setRegConfirmError('Passwords do not match.');
       valid = false;
     }
-    
+
     if (!valid) return;
-    
+
     setRegLoading(true);
     setTimeout(() => {
       setRegLoading(false);

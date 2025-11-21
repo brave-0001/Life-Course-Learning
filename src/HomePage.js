@@ -1,11 +1,8 @@
-// HomePage.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BookLibrary from './BookLibrary/BookLibrary';
 import './App.css';
 
 function HomePage() {
-  const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState('home');
   const [showContactModal, setShowContactModal] = useState(false);
   const [showLibrary, setShowLibrary] = useState(false);
@@ -17,8 +14,6 @@ function HomePage() {
   });
   const [formStatus, setFormStatus] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const handleBookNow = () => navigate('/login');
 
   const handleNavClick = (section) => {
     setActiveNav(section);
@@ -99,10 +94,6 @@ function HomePage() {
           <a href="#about" className={activeNav === 'about' ? 'active' : ''} onClick={() => handleNavClick('about')}>ABOUT US</a>
           <a href="#contact" className={activeNav === 'contact' ? 'active' : ''} onClick={() => handleNavClick('contact')}>CONTACT</a>
         </div>
-        <div className="nav-auth-buttons">
-          <button className="nav-login-btn" onClick={() => navigate('/login')}>LOGIN</button>
-          <button className="nav-signup-btn" onClick={() => navigate('/login', { state: { openRegister: true } })}>SIGN UP</button>
-        </div>
       </nav>
 
       {showLibrary ? (
@@ -111,13 +102,13 @@ function HomePage() {
         <>
           <div className="hero-section" id="home">
             <div className="hero-content">
-              <p className="hero-subtitle">Book Community</p>
+              <p className="hero-subtitle">Welcome Back!</p>
               <h1 className="hero-title">
-                NEVER STOP<br />EXPLORING THE<br />WORLD OF BOOKS.
+                EXPLORE THE<br />WORLD OF BOOKS.<br />GROW EVERY DAY.
               </h1>
               <p className="hero-description">
-                Discover thousands of books, connect with passionate readers,<br />
-                and expand your knowledge with our comprehensive library.
+                Discover thousands of titles, build your knowledge,<br />
+                and connect with our passionate reading community.
               </p>
               <div className="hero-stats">
                 <div className="stat-item">
@@ -133,7 +124,6 @@ function HomePage() {
                   <div className="stat-label">Categories</div>
                 </div>
               </div>
-              <button className="hero-btn" onClick={handleBookNow}>DISCOVER NOW</button>
             </div>
             <div className="card-grid">
               {cards.map((card, index) => (
@@ -159,7 +149,7 @@ function HomePage() {
               <div className="slider-progress">
                 <div className="progress-bar" style={{ width: `${((currentSlide + 1) / 4) * 100}%` }}></div>
               </div>
-              <span className="slider-number">0{currentSlide + 1}</span>
+              <span className="slider-number">{`0${currentSlide + 1}`}</span>
             </div>
           </div>
 
